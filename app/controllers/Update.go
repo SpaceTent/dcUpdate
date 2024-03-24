@@ -56,7 +56,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if out.Name == "" {
-		web.WriteTEXT(w, http.StatusNotFound, "Container Not Found")
+		web.WriteJSON(w, http.StatusNotFound, map[string]string{"Error": "Container Not Found"})
 		return
 	}
 
