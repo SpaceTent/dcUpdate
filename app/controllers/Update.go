@@ -4,7 +4,7 @@ import (
 	l "log/slog"
 	"net/http"
 
-	"dcupdate/app/services/docker"
+	"dcupdate/app/services/DockerAPI"
 	"dcupdate/app/services/dockerCompose"
 	"dcupdate/pkg/web"
 )
@@ -25,8 +25,8 @@ func Update(w http.ResponseWriter, r *http.Request) {
 
 	l.Info("Update Image: " + Image + " Tag: " + Tag)
 
-	out := docker.DCContainer{}
-	RunningContainers, _ := docker.GetRunningContainers()
+	out := DockerAPI.DCContainer{}
+	RunningContainers, _ := DockerAPI.GetRunningContainers()
 	for _, c := range RunningContainers {
 		if c.Name == Image {
 			out = c
@@ -37,7 +37,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 					dockerCompose.UpdateComposer(c, Tag)
 
 					// Tell Docker to Download any new Images
-					docker.GetNewImage(c, Tag)
+					DockerAPI.GetNewImage(c, Tag)
 
 					// We need to restart the container.  But with the new Tag Details..
 					// Ideally I'd like to Kill the Container and recreate it with the Same configuration

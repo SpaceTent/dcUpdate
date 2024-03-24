@@ -1,4 +1,4 @@
-package docker
+package DockerAPI
 
 import (
 	"context"

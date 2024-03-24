@@ -6,10 +6,10 @@ import (
 	"strings"
 
 	"dcupdate/app/environment"
-	"dcupdate/app/services/docker"
+	"dcupdate/app/services/DockerAPI"
 )
 
-func UpdateComposer(localContainer docker.DCContainer, NewTag string) {
+func UpdateComposer(localContainer DockerAPI.DCContainer, NewTag string) {
 
 	// Here is where it's a bit hacky, we are going to update the container with a new Tag
 	// so we update the Docker Compose File, and then issue a restart

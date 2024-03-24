@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"dcupdate/app/controllers"
+	"dcupdate/app/environment"
 )
 
 func Start() {
@@ -14,5 +15,5 @@ func Start() {
 	http.HandleFunc("/", controllers.Index)
 	http.HandleFunc("/update", controllers.Update)
 
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+environment.GetEnvString("BIND", "9000"), nil)
 }

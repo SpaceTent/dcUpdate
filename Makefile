@@ -1,4 +1,4 @@
-PROJECT := DCUpdate
+PROJECT := dcUpdate
 VERSION := $(shell git describe --tag --abbrev=0)
 NEXT_VERSION:=$(shell git describe --tags --abbrev=0 | awk -F . '{OFS="."; $$NF+=1; print}')
 SHA1 := $(shell git rev-parse HEAD)
@@ -7,7 +7,8 @@ TEMPLATE_PREFIX := $(shell cat .env | grep TEMPLATE_PREFIX | awk -F '=' '{print 
 
 build:
 	go generate
-	go build -o bin/$(PROJECT) -ldflags "-X main.GITCOMMIT=$(SHA1)" -ldflags "-X main.VERSION=$(VERSION) -X main.BUILDTIME=$(NOW)"
+	go build -o bin/$(PROJECT).local -ldflags "-X main.GITCOMMIT=$(SHA1)" -ldflags "-X main.VERSION=$(VERSION)" main.go
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/$(PROJECT).linux_amd64 -ldflags "-X main.GITCOMMIT=$(SHA1)" -ldflags "-X main.VERSION=$(VERSION)" main.go
 
 release: fmt
 	@git tag -a $(NEXT_VERSION) -m "Release $(NEXT_VERSION)"

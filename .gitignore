@@ -1,3 +1,4 @@
 local-test-data/*
 .env
+bin/*
 
