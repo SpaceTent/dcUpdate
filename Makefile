@@ -43,6 +43,9 @@ test:
 watch: fmt
 	@gow -c run .
 
+run-prod:
+	@gow -c run .
+
 run:
 	@go run .
 
