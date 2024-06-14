@@ -1,5 +1,8 @@
 # dcUpdate
 
+# Embarassingly
+### I came back to the project a few months later, I managed to implement all of this using bash scripts. This is a dead project. 
+
 ### dcUpdate is a simple tool designed to be called from your CI/CD pipline to update Docker containers. 
 
 This is not intended for production use, but rather for development and testing purposes. If you want to do this in production, you should use a more robust solution like Kubernetes, if your not changing tags on the containers, you can use Watchtower.
